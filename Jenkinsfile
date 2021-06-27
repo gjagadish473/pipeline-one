@@ -13,7 +13,7 @@ pipeline {
       }
     }
 
-    stage('commit') {
+    stage('upload') {
       steps {
         sh 'aws s3 cp target/petclinic.war s3://dev-jrtechee-artifactory/petclinic-$BUILD_NUMBER.war'
       }
