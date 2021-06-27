@@ -9,19 +9,19 @@ pipeline {
 
     stage('build') {
       steps {
-        sh 'ls'
+        sh '/opt/maven38/bin/mvn clean package'
       }
     }
 
     stage('commit') {
       steps {
-        sh 'ls'
+        sh 'aws s3 cp target/petclinic.war s3://dev-jrtechee-artifactory/petclinic-$BUILD_NUMBER.war'
       }
     }
 
     stage('deploy') {
       steps {
-        sh 'ls'
+        sh 'aws s3 cp s3://dev-jrtechee-artifactory/petclinic-$BUILD_NUMBER.war petclinic.war scp petclinic.war root@10.0.99.210:/opt/tomcat/webapps/'
       }
     }
 
